@@ -1,0 +1,17 @@
+{
+    "name": "iqvis/custom-plugin",
+    "description": "Just a simple plugin",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "salmankr",
+            "email": "44156508+salmankr@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+           "psr-4": {"Inc\\": "inc/"}
+       }
+}
