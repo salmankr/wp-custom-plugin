@@ -4,14 +4,15 @@
  */
 
 namespace Inc\components\html;
-
+use Inc\components\html\dashboard;
 class handler{
 	public function add(){
         add_menu_page( 'Admin Dashboard', 'Main Page', 'manage_options', 'main_page', array($this, 'render'), 'dashicons-testimonial');
 	}
 
 	public function render(){
-	    require_once PLUGIN_DIR_PATH . 'inc/components/html/admin-dashboard.php';
+	    $html = new dashboard;
+	    $html->html();
 	}
 
 	public function register(){
