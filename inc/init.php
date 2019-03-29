@@ -15,7 +15,7 @@ final class init{
 		return [
             actions\activate::class,
             actions\deactivate::class,
-            actions\settings::class,
+            actions\links::class,
             actions\scripts::class,
             components\CPT\Review\review::class,
             components\CPT\Review\metabox::class,

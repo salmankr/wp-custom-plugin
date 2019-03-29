@@ -5,7 +5,7 @@
 
 namespace Inc\actions;
 
-class settings{
+class links{
 
 	/**
 	 * include additional support links to plugin
@@ -13,8 +13,10 @@ class settings{
 	 * @return [Array] final array of links
 	 */
 	public function links($links){
-        $settings_links = '<a href = "admin.php?page=main_page">Settings</a>';
-        array_push($links, $settings_links);
+        $settings_link = '<a href = "admin.php?page=main_page">Settings</a>';
+        $edit_link = '<a href = "plugin-editor.php?plugin=custom-plugin%2Fcustom-plugin.php&Submit=Select">Edit</a>';
+        array_push($links, $settings_link);
+        array_push($links, $edit_link);
         return $links;
 	}
 
