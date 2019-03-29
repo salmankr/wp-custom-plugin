@@ -6,6 +6,11 @@
 namespace Inc\components\CPT\Review;
 
 class review{
+
+	/**
+	 * CPT function
+	 * @return ...
+	 */
     public function post(){
     	$labels = array(
     		'name'               => __( 'Reviews', 'text-domain' ),
@@ -58,6 +63,10 @@ class review{
         register_post_type( 'review-post',  $args );
     }
 
+    /**
+     * register CPT
+     * @return ...
+     */
     public function register(){
     	add_action('init', array($this, 'post'));
     }
