@@ -28,16 +28,6 @@ class settingsAPI{
 		return $this;
 	}
 
-	public function sectionsArr(array $sections){
-		$this->sections = $sections;
-		return $this;
-	}
-
-	public function fieldsArr(array $fields){
-		$this->fields = $fields;
-		return $this;
-	}
-
 	public function pageReg(){
 		if (empty($this->pages)) {
 		    return;
@@ -61,7 +51,7 @@ class settingsAPI{
 		    return;
 		}else{
 			foreach ($this->AdminCFs as $AdminCF) {
-				register_setting( $AdminCF['option_group'], $AdminCF['option_name'] );
+				register_setting( $AdminCF['option_group'], $AdminCF['option_name'], $AdminCF['args'] );
 			}
 		}
 	}

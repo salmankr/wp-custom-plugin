@@ -1,1 +1,157 @@
-/* all custom css related to admin dashboard goes here */
+
+/*
+ CSS for admin dashboard tabs
+*/
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+/*
+ Styling
+*/
+.tabset{
+  padding-top: 20px;
+}
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px 25px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  width: 22px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+  color: #06c;
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: #06c;
+}
+
+.tabset > input:checked + label {
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+}
+
+/*
+ Demo purposes only
+*/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.tabset {
+  max-width: 65em;
+}
+
+/*
+CSS for admin dashboard labels
+ */
+
+.tab-panel .wrap .checkbox-label{
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 35px;
+  padding-right: 10px;
+}
+
+/*
+CSS for admin dashboard checkboxes
+ */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #0085ba;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #0085ba;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

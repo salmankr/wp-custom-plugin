@@ -63,15 +63,34 @@ class handler{
      * @return Array
      */
     public function subpages(){
-        $args = array(
-            array(
+        if (get_option('CPT_checkbox') == 'checked') {
+            $CPT = array(
                 'parent_slug' => 'main_page',
-                'title' => 'Sub Page',
-                'menu_title' => 'Sub Page Menu',
+                'title' => 'CPT Manager',
+                'menu_title' => 'CPT Manager',
                 'capability' => 'manage_options',
-                'menu_slug' => 'sub_menu',
-                'callback' => array($this->callbacks, 'subpage'),
-            ),
+                'menu_slug' => 'cpt_menu',
+                'callback' => array($this->callbacks, 'cpt'),
+            );
+        }else{
+            $CPT = null;
+        }
+
+        if (get_option('metabox_checkbox') == 'checked') {
+            $metabox = array(
+                'parent_slug' => 'main_page',
+                'title' => 'MetaBox Manager',
+                'menu_title' => 'MetaBox Manager',
+                'capability' => 'manage_options',
+                'menu_slug' => 'metabox_menu',
+                'callback' => array($this->callbacks, 'metabox'),
+            );
+        }else{
+            $metabox = null;
+        }
+
+        $args = array(
+            $CPT, $metabox,
         );
         $this->register->subpagesArr($args);
     } 
@@ -81,18 +100,21 @@ class handler{
     public function AdminCF(){
         $args = array(
             array(
-                'option_group' => 'first_name',
-                'option_name' => 'first_name',
+                'option_group' => 'admin_settings_group',
+                'option_name' => 'CPT_checkbox',
+                'args' => array($this->callbacks, 'CFcallbacks'),
             ),
 
             array(
-                'option_group' => 'last_name',
+                'option_group' => 'admin_settings_group',
+                'option_name' => 'metabox_checkbox',
+                'args' => array($this->callbacks, 'CFcallbacks'),
+            ),
+
+            array(
+                'option_group' => 'admin_settings_group',
                 'option_name' => 'last_name',
-            ),
-
-            array(
-                'option_group' => 'sub_option_grp',
-                'option_name' => 'sub_test_field',
+                'args' => array(),
             ),
         );
         $this->register->settingsArr($args);

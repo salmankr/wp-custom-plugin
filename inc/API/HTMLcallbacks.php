@@ -4,9 +4,9 @@
  */
 
 namespace Inc\API;
-use Inc\components\html\subpage;
 use Inc\components\html\dashboard;
-use Inc\components\html\customField;
+use Inc\components\html\CPT;
+use Inc\components\html\Metabox;
 
 class HTMLcallbacks {
 
@@ -18,26 +18,34 @@ class HTMLcallbacks {
 		$html = new dashboard;
 		$html->html();
 	}
+    
     /**
-     * subpage HTML callback
-     * @return HTML
+     * cpt html dashboard
+     * @return html
      */
-	public function subpage(){
-		$html = new subpage;
-		$html->html();
+	public function cpt(){
+        $html = new CPT;
+        $html->html();
 	}
 
-	public function CFsection(){
-		$html = new customField;
-		$html->htmlSection();
+    /**
+     * metabox html dashboard
+     * @return html
+     */
+	public function metabox(){
+        $html = new Metabox;
+        $html->html();
 	}
 
-	public function CFfield(){
-		$html = new customField;
-		$html->htmlField();
-	}
-
-	public function OptionGrp($input){
-		return $input;
+    /**
+     * callback function for dashboard checkbox validation
+     * @param [array] $input [array for input fields]
+     */
+	public function CFcallbacks($input){
+		if (isset($input)) {
+			return 'checked';
+		}else{
+			return 'unchecked';
+		}
 	}
 }
