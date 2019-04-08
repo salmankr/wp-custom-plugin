@@ -23,17 +23,26 @@ class handler{
      */
     public $register;
     
-    
+    public $CFreg = array();
 
     /**
      * construct function
      */
     public function __construct(){
+
+        $this->CFreg = array(
+            'cpt_checkbox' => 'CPT Switch',
+            'metabox_checkbox' => 'Metabox Switch',
+        );
+
     	$this->callbacks = new HTMLcallbacks;
         $this->register = new settingsAPI;
         $this->pages();
         $this->subpages();
         $this->AdminCF();
+        $this->adminCFfields();
+        $this->adminCFsections();
+        
     }
     
 
@@ -98,27 +107,48 @@ class handler{
 
 
     public function AdminCF(){
-        $args = array(
-            array(
+        $args = array();
+        foreach ($this->CFreg as $id => $title) {
+            $args[] = array(
                 'option_group' => 'admin_settings_group',
-                'option_name' => 'CPT_checkbox',
+                'option_name' => $id,
                 'args' => array($this->callbacks, 'CFcallbacks'),
-            ),
-
-            array(
-                'option_group' => 'admin_settings_group',
-                'option_name' => 'metabox_checkbox',
-                'args' => array($this->callbacks, 'CFcallbacks'),
-            ),
-
-            array(
-                'option_group' => 'admin_settings_group',
-                'option_name' => 'last_name',
-                'args' => array(),
-            ),
-        );
+            );
+        }
         $this->register->settingsArr($args);
     }
+
+
+    public function adminCFfields(){
+        $args = array();
+        foreach ($this->CFreg as $id => $title) {
+            $args[] =  array(
+                'id' => $id,
+                'title' => $title,
+                'callback' => array($this->callbacks, 'CFfieldsCallbacks'),
+                'page' => 'main_page',
+                'section' => 'mainpage_section',
+                'args' => array(
+                    'label_for' => $id,
+                ),
+            );
+        }
+        $this->register->fieldsArr($args);
+    }
+
+
+    public function adminCFsections(){
+        $args = array(
+            array(
+                'id' => 'mainpage_section',
+                'title' => 'Admin Section',
+                'callback' => array($this->callbacks, 'CFsectionsCallbacks'),
+                'page' => 'main_page',
+            ),
+        );
+        $this->register->sectionArr($args);
+    }
+
 
     /**
      * Register hook for admin dashboard rendering

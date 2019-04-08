@@ -13,6 +13,10 @@ class settingsAPI{
 
 	public $AdminCFs = array();
 
+	public $AdminCFfields = array();
+
+	public $AdminCFsections = array();
+
 	public function pagesArr(array $pages){
 		$this->pages = $pages;
 		return $this;
@@ -26,6 +30,15 @@ class settingsAPI{
 	public function settingsArr(array $AdminCFs){
 		$this->AdminCFs = $AdminCFs;
 		return $this;
+	}
+
+	public function fieldsArr(array $AdminCFfields){
+		$this->AdminCFfields = $AdminCFfields;
+		return $this;
+	}
+
+	public function sectionArr(array $AdminCFsections){
+		$this->AdminCFsections = $AdminCFsections;
 	}
 
 	public function pageReg(){
@@ -52,6 +65,22 @@ class settingsAPI{
 		}else{
 			foreach ($this->AdminCFs as $AdminCF) {
 				register_setting( $AdminCF['option_group'], $AdminCF['option_name'], $AdminCF['args'] );
+			}
+		}
+
+		if (empty($this->AdminCFsections)) {
+			return;
+		}else{
+			foreach ($this->AdminCFsections as $AdminCFsection) {
+				add_settings_section( $AdminCFsection['id'], $AdminCFsection['title'], $AdminCFsection['callback'], $AdminCFsection['page'] );
+			}
+		}
+
+		if (empty($this->AdminCFfields)) {
+			return;
+		}else{
+			foreach ($this->AdminCFfields as $AdminCFfield) {
+				add_settings_field( $AdminCFfield['id'], $AdminCFfield['title'], $AdminCFfield['callback'], $AdminCFfield['page'], $AdminCFfield['section'], $AdminCFfield['args']);
 			}
 		}
 	}

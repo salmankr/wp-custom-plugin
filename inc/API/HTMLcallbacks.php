@@ -48,4 +48,20 @@ class HTMLcallbacks {
 			return 'unchecked';
 		}
 	}
+
+
+	public function CFfieldsCallbacks($args){
+		// var_dump($args);
+		$name = $args['label_for'];
+        ?>
+        <label class="switch">
+            <input type="checkbox" <?php echo (get_option($name) == 'checked' ? 'checked' : ''); ?> name="<?php echo $name; ?>">
+            <span class="slider round"></span>
+        </label>
+        <?php
+	}
+
+	public function CFsectionsCallbacks(){
+		echo 'This is just a plugin section';
+	}
 }

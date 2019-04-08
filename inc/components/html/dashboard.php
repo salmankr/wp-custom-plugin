@@ -30,33 +30,10 @@ class dashboard{
                     <div class="wrap">
                         <h1>Custom Plugin Dashboard</h1>
                         <?php settings_errors(); ?>
-                        <p>This is just a custom plugin test</p>
                         <form method="post" action="options.php">
                             <?php 
-                            wp_nonce_field();
                             settings_fields( 'admin_settings_group' );
-                            // $checkbox_cpt = get_option('CPT_checkbox');
-                            //     if ($checkbox_cpt == 'unchecked') {
-                            //         $class_cpt = '';
-                            //     }else{
-                            //         $class_cpt = 'checked';
-                            //     }
-
-                            // $checkbox_metabox = get_option('metabox_checkbox');
-
-                            ?>
-                            <label class="checkbox-label">CPT</label>
-                            <label class="switch">
-                                <input type="checkbox" <?php echo (get_option('CPT_checkbox') == 'checked' ? 'checked' : ''); ?> name="CPT_checkbox">
-                                <span class="slider round"></span>
-                            </label>
-
-                            <label class="checkbox-label">Metabox</label>
-                            <label class="switch">
-                                <input type="checkbox" <?php echo (get_option('metabox_checkbox') == 'checked' ? 'checked' : ''); ?> name="metabox_checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                            <?php
+                            do_settings_sections( 'main_page' );
                             submit_button();
                             ?>
                         </form>
